@@ -1,0 +1,39 @@
+package kol.common.model;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 单例
+ *
+ * @author kent
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class SingleResponse<T> extends Response {
+    private static final long serialVersionUID = 1L;
+    private T data;
+
+    public static SingleResponse<?> buildSuccess() {
+        SingleResponse<?> response = new SingleResponse<>();
+        response.setSuccess(true);
+        response.setErrCode("");
+        response.setErrMessage("");
+        return response;
+    }
+
+    public static SingleResponse<?> buildFailure(String errCode, String errMessage) {
+        SingleResponse<?> response = new SingleResponse<>();
+        response.setSuccess(false);
+        response.setErrCode(errCode);
+        response.setErrMessage(errMessage);
+        return response;
+    }
+
+    public static <T> SingleResponse<T> of(T data) {
+        SingleResponse<T> response = new SingleResponse<>();
+        response.setSuccess(true);
+        response.setData(data);
+        return response;
+    }
+}

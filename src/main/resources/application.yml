@@ -1,0 +1,101 @@
+server:
+  port: 8000
+  servlet:
+    encoding:
+      charset: UTF-8
+    session:
+      tracking-modes: cookie
+logging:
+  level:
+    io.grpc.internal.*: 'OFF'
+    io.contek.*: 'OFF'
+  file:
+    path: ./logs
+
+spring:
+  profiles:
+    active: pro
+
+  # mysql数据库连接配置
+  datasource:
+    # druid数据库连接池配置
+    name: druidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/quantket_kol?setUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: abcd.1234
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化连接数
+      initial-size: 1
+      # 最小连接数
+      min-idle: 1
+      # 最大连接数
+      max-active: 20
+      # 配置获取连接等待超时的时间(毫秒)
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      #配置有一个连接在连接池中的最小生存时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+      # 打开PSCache，指定每个连接上PSCache的大小
+      pool-prepared-statements: false
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: -1
+      # 配置监控统计拦截的filters，去掉后监控界面sql将无法统计，'wall'用于防火墙
+      filters: stat,wall
+      # 通过connectProperties属性来打开mergeSql功能，慢SQL记录
+      connect-properties: 
+        [druid.stat.mergeSql]: true
+        [druid.stat.slowSqlMillis]: 5000
+
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+    show-sql: true
+
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:database/data-config.sql
+
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    #    default-property-inclusion: non_null
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    time-zone: "Asia/Shanghai"
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.huohuo.top
+    username: master@huohuo.top
+    password: Abcd.1234
+    port: 25
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          # 邮件接收时间的限制，单位毫秒
+          timeout: 10000
+          # 连接时间的限制，单位毫秒
+          connectiontimeout: 10000
+          # 邮件发送时间的限制，单位毫秒
+          writetimeout: 10000
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+# 返佣定时任务
+rebate:
+  cron: 0 0 1 * * ?
+dispense:
+  server-url:
+      - http://127.0.0.1:7000

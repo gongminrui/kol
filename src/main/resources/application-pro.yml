@@ -1,0 +1,24 @@
+logging:
+  level:
+    io:
+      contek:
+        invoker:
+          commons:
+            actor:
+              http:
+                HttpLoggingInterceptor: 'INFO'
+    root: 'info'
+  file:
+    path: ./logs
+
+#配置参数
+config:
+  simulated: false
+  enableVip: true
+  useProxy: false
+  #结算模式 可选值 REAL_TIME, BILL
+  settleMode: BILL
+  key: e919232a-faec-44b7-a672-5a49a1daa7d5
+  secret: 110791637279E427DDC0F725B18DF5CA
+  password: Abcd.1234
+  

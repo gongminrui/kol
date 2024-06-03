@@ -1,0 +1,11 @@
+logging:
+  level:
+    "[io.grpc.internal.*]" : 'OFF'
+    "[io.contek.*]": 'OFF'
+  file:
+    path: ./logs
+
+config:
+  simulated: true
+  enableVip: true
+  useProxy: false
