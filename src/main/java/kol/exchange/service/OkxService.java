@@ -181,7 +181,7 @@ public class OkxService {
                 .setSide(cmd.getTradeType().getSide().toString().toLowerCase())
                 .setPosSide(cmd.getTradeType().getPositionSide().toString().toLowerCase())
                 .setSz(sz.toString())
-                .setTag("cef64854fbe8BCDE")
+                .setTag("dafaa242c7e6BCDE")
                 .submit();
 
         _Order order = null;

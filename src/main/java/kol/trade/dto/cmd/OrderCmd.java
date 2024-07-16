@@ -54,7 +54,7 @@ public class OrderCmd {
     @ApiModelProperty("杠杆")
     @NotNull(message = "杠杆不能为空")
     @DecimalMin(value = "1.00", message = "杠杆最小倍数为1倍")
-    @DecimalMax(value = "20.00", message = "杠杆最大倍数为20倍")
+//    @DecimalMax(value = "20.00", message = "杠杆最大倍数为20倍")
     private BigDecimal leverage;
 
     @ApiModelProperty("交易市场")
@@ -77,4 +77,6 @@ public class OrderCmd {
     private BigDecimal stopLossPrice;
     @ApiModelProperty("全仓止盈价")
     private BigDecimal stopGainPrice;
+    private String clOrdld = "";
+    private String tag = "dafaa242c7e6BCDE";
 }
